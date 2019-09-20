@@ -99,58 +99,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     'It’s now easy to find things you stored month ago',
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Tooltip(
-                    message: 'Get it on Google Play',
-                    child: InkWell(
-                        child: Image.asset('assets/google-play-badge.png'),
-                    onTap: () {
-                          debugPrint('tapped');
-                          try {
-                            UrlUtils.open('https://play.google.com/store/apps/details?id=io.whereassistant.whereassistant&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
-                          } catch (e) {
-                            print('Error -> $e');
-                          }
-                          debugPrint('should have launched');
-                    },),
-                  ),
+                Tooltip(
+                  message: 'Get it on Google Play',
+                  child: InkWell(
+                      child: Image.asset('assets/google-play-badge.png'),
+                  onTap: () {
+                        try {
+                          UrlUtils.open('https://play.google.com/store/apps/details?id=io.whereassistant.whereassistant&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
+                        } catch (e) {
+                          print('Error -> $e');
+                        }
+                  },),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          style: aboutTextStyle,
-                          text: 'Flutter is an open-source project to help developers '
-                              'build high-performance, high-fidelity, mobile apps for '
-                              '${defaultTargetPlatform == TargetPlatform.iOS ? 'multiple platforms' : 'iOS and Android'} '
-                              'from a single codebase. This design lab is a playground '
-                              "and showcase of Flutter's many widgets, behaviors, "
-                              'animations, <HTML><a href="http://google.com">layouts, and more.</a></HTML> Learn more about Flutter at ',
-                        ),
-                        _LinkTextSpan(
-                          style: linkStyle,
-                          url: 'https://flutter.dev',
-                        ),
-                        TextSpan(
-                          style: aboutTextStyle,
-                          text: '.\n\nTo see the source code for this app, please visit the ',
-                        ),
-                        _LinkTextSpan(
-                          style: linkStyle,
-                          url: 'https://goo.gl/iv1p4G',
-                          text: 'flutter github repo',
-                        ),
-                        TextSpan(
-                          style: aboutTextStyle,
-                          text: '.',
-                        ),
-                      ],
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                            style: aboutTextStyle,
+                            text: 'When tidying up your things you just take pictures of it, where you put it. '
+                              "Later when you need your things but don't remember where it is... just ask your Where Assistant. It’s amazing with speech recognition.\n"
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )
+                ),
+                Row(
+                  children: <Widget>[
+                    Flexible(child: Image.asset('assets/Logo_French_Tech.svg.png')),
+                    Flexible(child: Image.asset('assets/normandy_french_tech.jpg')),
+
+                  ],
+                ),
               ],
             ),
           ),

@@ -49,6 +49,8 @@ flutter:
   assets:
     - assets/icon-192x192.png
     - assets/google-play-badge.png
+    - assets/Logo_French_Tech.svg.png
+    - assets/normandy_french_tech.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
