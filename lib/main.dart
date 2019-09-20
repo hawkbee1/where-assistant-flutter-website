@@ -1,9 +1,7 @@
-import 'dart:io';
-
-import 'package:url_launcher/url_launcher.dart';
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'plugins/url_launcher/url_launcher.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -53,6 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+    final TextStyle aboutTextStyle = themeData.textTheme.body2;
+    final TextStyle linkStyle = themeData.textTheme.body2.copyWith(color: themeData.accentColor);
+    final String url = 'http://google.com';
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -105,10 +107,48 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Image.asset('assets/google-play-badge.png'),
                     onTap: () {
                           debugPrint('tapped');
-                          Link.fromUri('https://play.google.com/store/apps/details?id=io.whereassistant.whereassistant&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
-                          launch('https://play.google.com/store/apps/details?id=io.whereassistant.whereassistant&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
+                          try {
+                            UrlUtils.open('https://play.google.com/store/apps/details?id=io.whereassistant.whereassistant&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
+                          } catch (e) {
+                            print('Error -> $e');
+                          }
                           debugPrint('should have launched');
                     },),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          style: aboutTextStyle,
+                          text: 'Flutter is an open-source project to help developers '
+                              'build high-performance, high-fidelity, mobile apps for '
+                              '${defaultTargetPlatform == TargetPlatform.iOS ? 'multiple platforms' : 'iOS and Android'} '
+                              'from a single codebase. This design lab is a playground '
+                              "and showcase of Flutter's many widgets, behaviors, "
+                              'animations, <HTML><a href="http://google.com">layouts, and more.</a></HTML> Learn more about Flutter at ',
+                        ),
+                        _LinkTextSpan(
+                          style: linkStyle,
+                          url: 'https://flutter.dev',
+                        ),
+                        TextSpan(
+                          style: aboutTextStyle,
+                          text: '.\n\nTo see the source code for this app, please visit the ',
+                        ),
+                        _LinkTextSpan(
+                          style: linkStyle,
+                          url: 'https://goo.gl/iv1p4G',
+                          text: 'flutter github repo',
+                        ),
+                        TextSpan(
+                          style: aboutTextStyle,
+                          text: '.',
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -119,3 +159,33 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class _LinkTextSpan extends TextSpan {
+
+  // Beware!
+  //
+  // This class is only safe because the TapGestureRecognizer is not
+  // given a deadline and therefore never allocates any resources.
+  //
+  // In any other situation -- setting a deadline, using any of the less trivial
+  // recognizers, etc -- you would have to manage the gesture recognizer's
+  // lifetime and call dispose() when the TextSpan was no longer being rendered.
+  //
+  // Since TextSpan itself is @immutable, this means that you would have to
+  // manage the recognizer from outside the TextSpan, e.g. in the State of a
+  // stateful widget that then hands the recognizer to the TextSpan.
+
+  _LinkTextSpan({ TextStyle style, String url, String text }) : super(
+      style: style,
+      text: text ?? url,
+      recognizer: TapGestureRecognizer()..onTap = () {
+        try {
+          UrlUtils.open(url);
+        } catch (e) {
+          print('Error -> $e');
+        }
+
+      }
+  );
+}
+
