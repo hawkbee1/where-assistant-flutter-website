@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'plugins/url_launcher/url_launcher.dart';
+import 'package:whereassistant_io/ui/common/play_store_banner.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,19 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     'It’s now easy to find things you stored month ago',
                   ),
                 ),
-                Tooltip(
-                  message: 'Get it on Google Play',
-                  child: InkWell(
-                    child: Image.asset('assets/google-play-badge.png'),
-                    onTap: () {
-                      try {
-                        UrlUtils.open(
-                            'https://play.google.com/store/apps/details?id=io.whereassistant.whereassistant&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
-                      } catch (e) {
-                        print('Error -> $e');
-                      }
-                    },
-                  ),
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                        fit: FlexFit.loose,
+                        child: new PlayStoreBanner()),
+                  ],
                 ),
                 Center(
                   child: Padding(
