@@ -11,21 +11,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:whereassistant_io/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('checking home page is displayed', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
-    // Verify that our counter starts at 0.
+    // Verify that our title in appBar is Where Assistant.
     expect(find.text('Where Assistant'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // checking marketing text
     expect(find.text('It’s now easy to find things you stored month ago'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
+    // Tap the on the play store link.
     await tester.tap(find.byTooltip('Get it on Google Play'));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
+    // check previous tests still OK after pressing the link.
+    expect(find.text('Where Assistant'), findsOneWidget);
+    expect(find.text('It’s now easy to find things you stored month ago'), findsOneWidget);
 //    expect(find.text('tidying'), findsOneWidget);
   });
 }
