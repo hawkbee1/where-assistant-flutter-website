@@ -70,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Image.asset('assets/Logo_French_Tech.svg.png')),
                     Flexible(
                         child: Image.asset('assets/normandy_french_tech.jpg')),
+                    Flexible(child: Image.network('https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png')),
                   ],
                 ),
               ],
