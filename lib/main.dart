@@ -50,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Flexible(
                         fit: FlexFit.loose,
