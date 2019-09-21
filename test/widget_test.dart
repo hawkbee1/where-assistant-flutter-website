@@ -5,10 +5,12 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image_test_utils/image_test_utils.dart';
 import 'package:whereassistant_io/main.dart';
+import 'package:firebase_analytics/observer.dart';
 
 void main() {
   final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +27,6 @@ Future checkHomePage(WidgetTester tester, Size size, TestWidgetsFlutterBinding b
   await provideMockedNetworkImages(() async {
 //    setting the size of the screen
     await binding.setSurfaceSize(size);
-
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
