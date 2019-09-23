@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:whereassistant_io/ui/common/footer_logos.dart';
 import 'package:whereassistant_io/ui/common/play_store_banner.dart';
 
 void main() => runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   final title = 'Where Assistant';
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
-  FirebaseAnalyticsObserver(analytics: analytics);
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Stack(
@@ -65,9 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Flexible(
-                        fit: FlexFit.loose,
-                        child: new PlayStoreBanner()),
+                    Flexible(fit: FlexFit.loose, child: new PlayStoreBanner()),
                   ],
                 ),
                 Center(
@@ -78,15 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         "Later when you need your things but don't remember where it is... just ask your Where Assistant. It’s amazing with speech recognition.\n"),
                   ),
                 ),
-                Row(
-                  children: <Widget>[
-                    Flexible(
-                        child: Image.asset('assets/Logo_French_Tech.svg.png')),
-                    Flexible(
-                        child: Image.asset('assets/normandy_french_tech.jpg')),
-                    Flexible(child: Image.network('https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png')),
-                  ],
-                ),
+                FooterLogos(width),
               ],
             ),
           ),
