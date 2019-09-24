@@ -8,9 +8,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:image_test_utils/image_test_utils.dart';
 import 'package:whereassistant_io/main.dart';
-import 'package:firebase_analytics/observer.dart';
 
 void main() {
   final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
@@ -24,24 +22,22 @@ void main() {
 }
 
 Future checkHomePage(WidgetTester tester, Size size, TestWidgetsFlutterBinding binding) async {
-  await provideMockedNetworkImages(() async {
 //    setting the size of the screen
-    await binding.setSurfaceSize(size);
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  await binding.setSurfaceSize(size);
+  // Build our app and trigger a frame.
+  await tester.pumpWidget(MyApp());
 
-    // Verify that our title in appBar is Where Assistant.
-    expect(find.text('Where Assistant'), findsOneWidget);
-    // checking marketing text
-    expect(find.text('It’s now easy to find things you stored month ago'), findsOneWidget);
+  // Verify that our title in appBar is Where Assistant.
+  expect(find.text('Where Assistant'), findsOneWidget);
+  // checking marketing text
+  expect(find.text('It’s now easy to find things you stored month ago'), findsOneWidget);
 
-    // Tap the on the play store link.
-    await tester.tap(find.byTooltip('Get it on Google Play'));
-    await tester.pump();
+  // Tap the on the play store link.
+  await tester.tap(find.byTooltip('Get it on Google Play'));
+  await tester.pump();
 
-    // check previous tests still OK after pressing the link.
-    expect(find.text('Where Assistant'), findsOneWidget);
-    expect(find.text('It’s now easy to find things you stored month ago'), findsOneWidget);
+  // check previous tests still OK after pressing the link.
+  expect(find.text('Where Assistant'), findsOneWidget);
+  expect(find.text('It’s now easy to find things you stored month ago'), findsOneWidget);
   //    expect(find.text('tidying'), findsOneWidget);
-  });
 }

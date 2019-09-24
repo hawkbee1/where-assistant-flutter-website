@@ -10,12 +10,11 @@ main() {
     expect(find.byTooltip('Normandy French Tech logo'), findsOneWidget);
     expect(find.byTooltip('Flutter logo'), findsOneWidget);
 //    the middle logo is at center ?
+//        need finish writing this test ore trying golden test (compare app screen with image)
     Offset normandyCenter =
         tester.getCenter(find.byTooltip('Normandy French Tech logo'));
     print(normandyCenter.dx);
     print(normandyCenter.dy);
-    expect(tester.getCenter(find.byTooltip('Normandy French Tech logo')),
-        findsOneWidget);
   });
 }
 
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
             Center(
               child: Text(title),
             ),
-            FooterLogos(),
+            FooterLogos(200.0),
           ],
         ),
       ),
