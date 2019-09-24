@@ -14,7 +14,11 @@ main() {
     Offset normandyCenter =
         tester.getCenter(find.byTooltip('Normandy French Tech logo'));
     print(normandyCenter.dx);
+    int x = normandyCenter.dx.floor();
     print(normandyCenter.dy);
+    int y = normandyCenter.dy.floor();
+    expect(x, equals(366));
+    expect(y, equals(103));
   });
 }
 
