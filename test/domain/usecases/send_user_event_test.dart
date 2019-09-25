@@ -2,29 +2,29 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:whereassistant_io/core/domain/repositories/send_user_event_repository.dart';
-import 'package:whereassistant_io/core/domain/usecases/send_user_page_view.dart';
+import 'package:whereassistant_io/core/domain/usecases/send_user_event.dart';
 
 class MockSendUserEventRepository extends Mock implements SendUserEventRepository {}
 
 main() {
-  SendUserPageView usecase;
+  SendUserEvent usecase;
   MockSendUserEventRepository mockSendUserEventRepository;
 
   setUp(() {
     mockSendUserEventRepository = MockSendUserEventRepository();
-    usecase = SendUserPageView(mockSendUserEventRepository);
+    usecase = SendUserEvent(mockSendUserEventRepository);
   });
 
-  final String tUserPageView  = 'testPage';
+  final String tCategory  = 'testCategory';
+  final String tEvent  = 'testEvent';
 
-  test('domain should send page view event to repository and return null', () async {
+  test('domain should send user event to repository and return null', () async {
 //
     when(mockSendUserEventRepository.sendUserPageView(any)).thenAnswer((_) async => null);
-//    changed usecase.execute(... into usecase(... since dart use a method named call which can be run by object.call() or object()
-    final result = await usecase(userPageView: tUserPageView);
+    final result = await usecase(category: tCategory, event: tEvent);
 //    we test result is what we expect
     expect(result, null);
 //    verify() check the method has been called with the given property
-    verify(mockSendUserEventRepository.sendUserPageView(tUserPageView));
+    verify(mockSendUserEventRepository.sendUserEvent(tCategory, tEvent));
   });
 }
