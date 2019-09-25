@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:whereassistant_io/main.dart';
 
+
 void main() {
   final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
   final List surfaceSizes = [[800.0,600.0], [400.0,300.0], [200.0,150.0], [100.0,75.0]];
