@@ -2,8 +2,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:whereassistant_io/ui/common/footer_logos.dart';
 import 'package:whereassistant_io/ui/common/play_store_banner.dart';
+import 'package:usage/usage_html.dart';
+
+Analytics _analytics;
+String _lastUa;
+int _count = 0;
 
 void main() => runApp(MyApp());
+
+Analytics getAnalytics() {
+  if (_analytics == null) {
+    _lastUa = 'UA-110024239-1';
+    _analytics = new AnalyticsHtml(_lastUa, 'whereassistant', '3.0');
+    _analytics.sendScreenView('homePage');
+    _analytics.sendEvent('visit', 'homePage');
+  }
+
+  return _analytics;
+}
 
 class MyApp extends StatelessWidget {
   final title = 'Where Assistant';
@@ -31,6 +47,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    Analytics analytics = getAnalytics();
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
